@@ -1,8 +1,8 @@
-var path = require('path')
-var express = require('express')
-var webpack = require('webpack')
+var path = require('path') // node.js提供的一些API，表示文件路径操作的一些方法
+var express = require('express') // 是node.js的一个框架，用它去启用一个server
+var webpack = require('webpack') // 核心编译工具
 var config = require('../config')
-var proxyMiddleware = require('http-proxy-middleware')
+var proxyMiddleware = require('http-proxy-middleware') // http代理的中间件，可以代理或转发需要的一些API
 var webpackConfig = process.env.NODE_ENV === 'testing'
   ? require('./webpack.prod.conf')
   : require('./webpack.dev.conf')

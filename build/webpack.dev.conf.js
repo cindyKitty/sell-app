@@ -1,9 +1,9 @@
 var config = require('../config')
 var webpack = require('webpack')
-var merge = require('webpack-merge')
+var merge = require('webpack-merge') // 用来合并配置文件
 var utils = require('./utils')
 var baseWebpackConfig = require('./webpack.base.conf')
-var HtmlWebpackPlugin = require('html-webpack-plugin')
+var HtmlWebpackPlugin = require('html-webpack-plugin') // webpack提供的操作HTML的插件
 
 // add hot-reload related code to entry chunks
 Object.keys(baseWebpackConfig.entry).forEach(function (name) {

@@ -12,10 +12,10 @@ module.exports = {
     publicPath: process.env.NODE_ENV === 'production' ? config.build.assetsPublicPath : config.dev.assetsPublicPath,
     filename: '[name].js'
   },
-  resolve: {
-    extensions: ['', '.js', '.vue'],
+  resolve: { // 用于在代码中通过require或import模块的一些相关配置
+    extensions: ['', '.js', '.vue'], // 表示在require的目录中可以自动补全文件后缀
     fallback: [path.join(__dirname, '../node_modules')],
-    alias: {
+    alias: { // 提供一些别名，在reuire中通过别名缩短字符串长度 
       'src': path.resolve(__dirname, '../src'),
       'assets': path.resolve(__dirname, '../src/assets'),
       'components': path.resolve(__dirname, '../src/components')
@@ -77,7 +77,7 @@ module.exports = {
     ]
   },
   eslint: {
-    formatter: require('eslint-friendly-formatter')
+    formatter: require('eslint-friendly-formatter') // 当前eslint检查到错误的时候，会有好的提示一个错误信息，并提供一个eslint官网的链接，用于查看具体的原因
   },
   vue: {
     loaders: utils.cssLoaders()
