@@ -14,7 +14,9 @@ Vue.use(VueRouter)
 // vue-router1.x的写法
 let app = Vue.extend(App)
 
-let router = new VueRouter()
+let router = new VueRouter({
+  linkActiveClass: 'active'
+})
 
 router.map({
   '/goods': {
@@ -29,7 +31,7 @@ router.map({
 })
 
 router.start(app, '#app')
-router.go('/ratings')
+router.go('/goods')
 // // vue-router2.x 写法
 // // const app = Vue.extend(App)
 // // 定义路由
