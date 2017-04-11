@@ -4,6 +4,7 @@ import App from './App'
 import goods from 'components/goods/goods'
 import ratings from 'components/ratings/ratings'
 import seller from 'components/seller/seller.vue'
+import 'common/stylus/index.styl'
 
 Vue.use(VueRouter)
 // /* eslint-disable no-new */
