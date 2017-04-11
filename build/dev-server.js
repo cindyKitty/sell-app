@@ -14,6 +14,35 @@ var port = process.env.PORT || config.dev.port
 var proxyTable = config.dev.proxyTable
 
 var app = express()
+var appData = require('../data.json')
+var seller = appData.seller
+var goods = appData.goods
+var ratings = appData.ratings
+// express框架是启动一个node server ；如下通入express的Router()来编写接口请求
+var apiRoutes = express.Router()
+apiRoutes.get('/seller', function (req, res){
+ res.json ({
+  errno: 0,
+  data: seller
+ })
+})
+
+apiRoutes.get('/goods', function (req, res){
+ res.json ({
+  errno: 0,
+  data: goods
+ })
+})
+
+apiRoutes.get('/ratings', function (req, res){
+ res.json ({
+  errno: 0,
+  data: ratings
+ })
+})
+// 接口相关的都会通过api的路由
+app.use('/api', apiRoutes)
+
 var compiler = webpack(webpackConfig)
 
 var devMiddleware = require('webpack-dev-middleware')(compiler, {
