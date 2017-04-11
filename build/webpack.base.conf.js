@@ -17,7 +17,6 @@ module.exports = {
     fallback: [path.join(__dirname, '../node_modules')],
     alias: { // 提供一些别名，在reuire中通过别名缩短字符串长度 
       'src': path.resolve(__dirname, '../src'),
-      'assets': path.resolve(__dirname, '../src/assets'),
       'components': path.resolve(__dirname, '../src/components')
     }
   },
