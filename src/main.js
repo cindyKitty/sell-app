@@ -29,7 +29,7 @@ router.map({
 })
 
 router.start(app, '#app')
-
+router.go('/ratings')
 // // vue-router2.x 写法
 // // const app = Vue.extend(App)
 // // 定义路由
