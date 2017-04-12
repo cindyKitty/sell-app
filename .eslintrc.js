@@ -20,6 +20,8 @@ module.exports = {
     // 'semi': ['error', 'always'],
     // 取消esint缩进规则
     'indent': 0,
+    // 取消方法名和括号之间必须加空格的规则
+    'space-before-function-paren': 0,
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0
   }
