@@ -32,7 +32,7 @@
       	</li>
       </ul>
     </div>
-    <shopcart></shopcart>
+    <shopcart :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice"></shopcart>
   </div>
 </template>
 
@@ -41,6 +41,11 @@
   import shopcart from 'components/shopcart/shopcart'
   const ERR_OK = 0
   export default {
+    props: {
+      seller: {
+        type: Object
+      }
+    },
     data () {
       return {
         goods: [],
