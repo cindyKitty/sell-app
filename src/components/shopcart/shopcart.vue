@@ -1,18 +1,19 @@
 <template>
   <div class="shopcart">
   	<div class="content">
-  	  <div class="content-left">
+  	  <div class="content-left" :class="{'highlight':totalCount>0}">
   	  	<div class="logo-wrapper">
   	  	  <div class="logo">
   	  	  	<i class="icon-shopping_cart"></i>
   	  	  </div>
+  	  	  <div class="num" v-show="totalCount>0">{{totalCount}}</div>
   	  	</div>
-  	  	<div class="price">10元</div>
+  	  	<div class="price">¥{{totalPrice}}</div>
   	  	<div class="desc">另需配送费¥{{deliveryPrice}}元</div>
   	  </div>
   	  <div class="content-right">
-  	  	<div class="pay">
-  	      ¥{{minPrice}}元起送
+  	  	<div class="pay" :class="{'enough': payDesc.isEnough, 'not-enough': !payDesc.isEnough}">
+  	      {{payDesc.desc}}
   	  	</div>
   	  </div>
   	</div>
@@ -21,6 +22,18 @@
 <script>
   export default {
     props: {
+      selectFoods: {
+        type: Array,
+        default () {
+          return []
+          // return [
+          //   {
+          //     price: 3,
+          //     count: 1
+          //   }
+          // ]
+        }
+      },
       deliveryPrice: {
         type: Number,
         default: 0
@@ -28,6 +41,39 @@
       minPrice: {
         type: Number,
         default: 0
+      }
+    },
+    computed: {
+      totalPrice () {
+        let total = 0
+        this.selectFoods.forEach((food) => {
+          total += food.price * food.count
+        })
+        return total
+      },
+      totalCount () {
+        let count = 0
+        this.selectFoods.forEach((food) => {
+          count += food.count
+        })
+        return count
+      },
+      payDesc() {
+        let obj = {}
+        if (this.totalPrice === 0) {
+          obj.desc = `¥${this.minPrice}元起送`
+          obj.isEnough = false
+          return obj
+        } else if (this.totalPrice < this.minPrice) {
+          let diff = this.minPrice - this.totalPrice
+          obj.desc = `还差¥${diff}元起送`
+          obj.isEnough = false
+          return obj
+        } else {
+          obj.desc = '去结算'
+          obj.isEnough = true
+          return obj
+        }
       }
     }
   }
@@ -48,6 +94,13 @@
       color: rgba(255, 255,255, 0.4)
       .content-left
         flex: 1
+        &.highlight
+          .logo-wrapper>.logo
+            background: rgb(0,160,220)
+            .icon-shopping_cart
+              color: #fff 
+          .price
+            color: #fff
         .logo-wrapper
           display: inline-block
           vertical-align: top
@@ -70,6 +123,20 @@
           	  line-height: 44px
           	  font-size: 24px
           	  color: #80858a
+          .num
+          	position: absolute
+          	top: 0
+          	right: 0
+          	width: 24px
+          	height: 16px
+          	line-height: 16px
+          	text-align: center
+          	border-radius: 16px
+          	font-size: 9px
+          	font-weight: 700
+          	color: #fff
+          	background: rgb(240,20,20)
+          	bax-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4)
         .price
           display: inline-block
           vertical-align: top
@@ -96,4 +163,9 @@
           font-size: 12px
           font-weight: 700
           background: #2b333b
+          &.not-enough
+            background: #2b333b
+          &.enough
+          	background: #00b43c
+          	color: #fff
 </style>
