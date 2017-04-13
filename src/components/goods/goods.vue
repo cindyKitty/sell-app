@@ -35,7 +35,7 @@
       	</li>
       </ul>
     </div>
-    <shopcart :select-foods="selectFoods" :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice"></shopcart>
+    <shopcart v-ref:shopcart :select-foods="selectFoods" :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice"></shopcart>
   </div>
 </template>
 
@@ -69,7 +69,6 @@
         return 0
       },
       selectFoods() {
-        debugger
         let foods = []
         this.goods.forEach((good) => {
           good.foods.forEach((food) => {
@@ -124,11 +123,23 @@
           height += item.clientHeight
           this.listHeight.push(height)
         }
+      },
+      _drop(target) {
+        // 体验优化，异步执行下落动画
+        this.$nextTick(() => {
+          // 访问子组件的方法
+        this.$refs.shopcart.drop(target)
+      })
       }
     },
     components: {
       shopcart,
       cartcontrol
+    },
+    events: {
+      'cart.add' (target) {
+        this._drop(target)
+      }
     }
   }
 </script>
