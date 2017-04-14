@@ -27,7 +27,7 @@
         <div class="title">购物车</div>
         <div class="empty">清空</div>
       </div>
-      <div class="list-content">
+      <div class="list-content" v-el:list-content>
         <ul>
           <li class="food" v-for="food in selectFoods">
             <span class="name">{{food.name}}</span>
@@ -44,6 +44,7 @@
   </div>
 </template>
 <script>
+  import BScroll from 'better-scroll'
   import cartcontrol from 'components/cartcontrol/cartcontrol'
   export default {
     props: {
@@ -118,7 +119,17 @@
           this.fold = true
           return false
         }
-        return !this.fold
+        let show = !this.fold
+        if (show) {
+          this.$nextTick(() => {
+            if (!this.scroll) {
+              this.scroll = new BScroll(this.$els.listContent, {click: true})
+            } else {
+              this.scroll.refresh()
+            }
+          })
+        }
+        return show
       }
     },
     methods: {
