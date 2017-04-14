@@ -24,8 +24,8 @@
     </div>
     <div class="shopcart-list" v-show="listShow" transition="fold">
       <div class="list-header">
-        <div class="title">购物车</div>
-        <div class="empty">清空</div>
+        <h1 class="title">购物车</h1>
+        <span class="empty" @click="empty">清空</span>
       </div>
       <div class="list-content" v-el:list-content>
         <ul>
@@ -42,6 +42,7 @@
       </div>
     </div>
   </div>
+  <div class="list-mask" v-show="listShow" transition="fade" @click="hideList"></div>
 </template>
 <script>
   import BScroll from 'better-scroll'
@@ -149,6 +150,14 @@
           return
         }
         this.fold = !this.fold
+      },
+      empty() {
+        this.selectFoods.forEach((food) => {
+          food.count = 0
+        })
+      },
+      hideList() {
+        this.fold = true
       }
     },
     transitions: {
@@ -353,4 +362,19 @@
             position: absolute
             right: 0
             bottom: 6px
+  .list-mask
+    position: fixed
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+    z-index:40
+    backdrop-filter: blur(10px)
+    &.fade-transition
+      transition: all 0.5s
+      opacity: 1
+      background: rgba(7,17,27,0.6)
+    &.fade-enter,&.fade-leave
+      opacity: 0
+      background: rgba(7,17,27,0)
 </style>
