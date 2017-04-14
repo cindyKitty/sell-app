@@ -20,7 +20,11 @@
 	  </div>
 	  <div @click.stop.prevent="addFirst" class="buy" v-show="!food.count || food.count===0" transition="fade">加入购物车</div>
   	</div>
-  	<split></split>
+  	<split v-show="food.info"></split>
+  	<div class="info" v-show="food.info">
+  	  <h1 class="title">商品信息</h1>
+  	  <p class="text">{{food.info}}</p>
+  	</div>
   </div>
 </template>
 <script>
@@ -154,4 +158,16 @@
 	      opacity: 1
 	    &.fade-enter,&.fade-leave
 	      opacity: 0
+	.info
+	  padding: 18px
+	  .title
+	  	line-height: 14px
+	  	margin-bottom: 6px
+	  	font-size: 14px
+	  	color: rgb(7,17,27)
+	  .text
+	  	padding: 0 8px
+	  	line-height: 24px
+	  	font-size: 12px
+	  	color: rgb(77,85,93)
 </style>
