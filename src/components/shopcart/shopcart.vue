@@ -11,7 +11,7 @@
   	  	<div class="price">¥{{totalPrice}}</div>
   	  	<div class="desc">另需配送费¥{{deliveryPrice}}元</div>
   	  </div>
-  	  <div class="content-right">
+  	  <div class="content-right" @click.stop.prevent="pay">
   	  	<div class="pay" :class="{'enough': payDesc.isEnough, 'not-enough': !payDesc.isEnough}">
   	      {{payDesc.desc}}
   	  	</div>
@@ -158,6 +158,12 @@
       },
       hideList() {
         this.fold = true
+      },
+      pay() {
+        if (this.totalPrice < this.minPrice) {
+          return
+        }
+        window.alert(`支付${this.totalPrice}元`)
       }
     },
     transitions: {
