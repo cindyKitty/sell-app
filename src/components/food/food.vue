@@ -27,7 +27,7 @@
   	  <p class="text">{{food.info}}</p>
   	</div>
     <split></split>
-    <div class="ratings">
+    <div class="food-ratings">
       <h1 class="title">商品评价</h1>
       <ratingselect :select-type="selectType" :only-content="onlyContent" :desc="desc" :ratings="food.ratings"></ratingselect>
       <div class="rating-wrapper">
@@ -237,7 +237,7 @@
 	  	line-height: 24px
 	  	font-size: 12px
 	  	color: rgb(77,85,93)
-  .ratings
+  .food-ratings
     padding-top: 18px
     .title
       line-height: 14px
