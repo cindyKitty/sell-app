@@ -1,5 +1,6 @@
 <template>
   <div v-show="showFlag" class="food" transition="move" v-el:food>
+  <div class="food-content">
   	<div class="image-header">
   	  <img :src="food.image">
   	  <div class="back" @click="showFlag=false">
@@ -25,6 +26,7 @@
   	  <h1 class="title">商品信息</h1>
   	  <p class="text">{{food.info}}</p>
   	</div>
+    </div>
   </div>
 </template>
 <script>
