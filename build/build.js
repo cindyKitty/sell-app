@@ -17,6 +17,7 @@ console.log(
 var spinner = ora('building for production...')
 spinner.start()
 
+// 将项目中static目录下的文件完全拷贝到生成的dist目录下的static目录中
 var assetsPath = path.join(config.build.assetsRoot, config.build.assetsSubDirectory)
 rm('-rf', assetsPath)
 mkdir('-p', assetsPath)
