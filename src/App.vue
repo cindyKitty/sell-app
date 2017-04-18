@@ -21,19 +21,27 @@
 
 <!-- <script type="text/ecmascript-6"> -->
  <script>
+  import {urlParse} from 'common/js/util'
   import header from 'components/header/header.vue'
   const ERR_OK = 0
   export default{
     data () {
       return {
-        seller: {}
+        seller: {
+          id: (() => {
+            let queryParam = urlParse()
+            return queryParam.id
+          })()
+        }
       }
     },
     created() {
-      this.$http.get('/api/seller').then((response) => {
+      this.$http.get('/api/seller?id=' + this.seller.id).then((response) => {
         response = response.body
         if (response.errno === ERR_OK) {
           this.seller = response.data
+          //vue官网推荐的给对象扩展属性的方法： es6语法：Object.assign()
+          this.seller = Object.assign({}, this.seller, reponse.data)
         }
       })
     },

@@ -193,7 +193,7 @@
       	position: absolute
       	width: 50px
       	top: 18px
-      	right: 5px
+      	right: 11px
       	text-align: center
       	.icon-favorite
       	  display: block
